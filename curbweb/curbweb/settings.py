@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api',
+    'rest_framework'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -76,11 +78,27 @@ WSGI_APPLICATION = 'curbweb.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'curbside',
+        'USER':'postgres',
+        'PASSWORD':'k@t21007',
+        'HOST':'localhost',
     }
 }
 
+
+REST_FRAMEWORK = {
+    # Use hyperlinked styles by default.
+    # Only used if the `serializer_class` attribute is not set on a view.
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+        'rest_framework.serializers.HyperlinkedModelSerializer',
+
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+         'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
