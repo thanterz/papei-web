@@ -10,6 +10,7 @@ class purchase(models.Model):
 
 class shop(models.Model):
 	name = models.CharField(max_length=50)
+	logo = models.ImageField(upload_to='slogos',default='')
 
 class shop_places(models.Model):
 	lat = models.FloatField()
@@ -27,6 +28,7 @@ class product(models.Model):
 	price = models.FloatField()
 	description = models.TextField()
 	sid = models.ForeignKey(shop,related_name='products')
+	photo = models.ImageField(upload_to='products',default='')
 
 class comments(models.Model):
 	desc = models.TextField()
@@ -38,5 +40,9 @@ class purchase_items(models.Model):
 	purchase = models.ForeignKey(purchase,related_name='purchase_items')
 	product = models.ForeignKey(product,related_name='products')
 
+class announcements(models.Model):
+	summary = models.TextField()
+	body = models.TextField()
+	image = models.ImageField(upload_to='announce',default='')
 
 

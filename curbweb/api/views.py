@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from api.serializers import commentsSerializer,productSerializer,productcatSerializer,shopSerializer
-from models import comments,product,product_category,shop
+from rest_framework.response import Response
+from api.serializers import commentsSerializer,productSerializer,productcatSerializer,shopSerializer,singleShopSerializer,announcementsSerializer
+from models import comments,product,product_category,shop,announcements
 from django.core import serializers
 
 # Create your views here.
@@ -22,5 +23,19 @@ class productcatViewSet(viewsets.ModelViewSet):
 	serializer_class = productcatSerializer
 
 class shopViewSet(viewsets.ModelViewSet):
+	allowed_methods = ('GET','POST', 'PUT', 'DELETE','HEAD','OPTIONS')
 	queryset = shop.objects.all()
 	serializer_class = shopSerializer
+
+class announcementsViewSet(viewsets.ModelViewSet):
+	allowed_methods = ('GET','POST', 'PUT', 'DELETE','HEAD','OPTIONS')
+	queryset = announcements.objects.all()
+	serializer_class = announcementsSerializer
+
+class singleShopViewSet(viewsets.ViewSet):
+	#allowed_methods = ('GET','POST', 'PUT', 'DELETE','HEAD','OPTIONS')
+	def list(self,request,shopid=None):
+		queryset = shop.objects.all()
+		serializer = singleShopSerializer(queryset,many=True,context={'request': request})
+		return Response(serializer.data)
+

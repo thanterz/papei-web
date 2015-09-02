@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf.urls.static import static
 from rest_framework import routers
 from api import views
 
@@ -23,9 +24,12 @@ router.register(r'api/comments',views.commentsViewSet)
 router.register(r'api/products',views.productViewSet)
 router.register(r'api/categories',views.productcatViewSet)
 router.register(r'api/shops',views.shopViewSet)
+router.register(r'api/(?P<shopid>\d+)/shop',views.singleShopViewSet,base_name="shop")
+router.register(r'api/announcements',views.announcementsViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(router.urls)), 
     url(r'^api-auth/', include('rest_framework.urls',namespace='rest_framework')),
+    url(r'^rest-auth/', include('rest_auth.urls')),
 ]
