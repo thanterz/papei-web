@@ -7,6 +7,7 @@ class purchase(models.Model):
 	purchase_no = models.CharField(max_length=20)
 	client = models.ForeignKey(User,related_name='user_id')
 	pick = models.BooleanField(default=False)
+	date = models.DateTimeField()
 
 class shop(models.Model):
 	name = models.CharField(max_length=50)
