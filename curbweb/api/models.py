@@ -21,6 +21,10 @@ class product_category(models.Model):
 	name = models.CharField(max_length=150)
 	parent_cat_id = models.IntegerField()
 
+class shop_categories(models.Model):
+	shop = models.ForeignKey(shop,related_name='shops')
+	categ = models.ForeignKey(product_category,related_name='categories')
+
 class product(models.Model):
 	sku = models.CharField(max_length=20)
 	name = models.CharField(max_length=150)

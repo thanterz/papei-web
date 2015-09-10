@@ -1,5 +1,5 @@
 from django.forms import widgets
-from models import purchase,shop,shop_places,product_category,product,comments,purchase_items,announcements
+from models import shop_categories,purchase,shop,shop_places,product_category,product,comments,purchase_items,announcements
 from rest_framework import serializers
 
 
@@ -13,6 +13,10 @@ class productSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = product
 		fields = ('id','sku','name','url','price','description','photo','categ','sid')
+
+class productcategoryshopSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = product
 
 class productcatSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
@@ -32,3 +36,8 @@ class singleShopSerializer(serializers.HyperlinkedModelSerializer):
 class announcementsSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model=announcements
+
+class categoryshopSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model= product_category
+

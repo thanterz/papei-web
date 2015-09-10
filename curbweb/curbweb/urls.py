@@ -26,6 +26,9 @@ router.register(r'api/categories',views.productcatViewSet)
 router.register(r'api/shops',views.shopViewSet)
 router.register(r'api/(?P<shopid>\d+)/shop',views.singleShopViewSet,base_name="shop")
 router.register(r'api/announcements',views.announcementsViewSet)
+router.register(r'api/shops/(?P<shop_id>\d+)/categories',views.categoryshopViewSet,base_name="product_category")
+router.register(r'api/shops/(?P<shop_id>\d+)/categories/(?P<cat_id>\d+)',views.productcategoryshopViewSet,base_name="product")
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
