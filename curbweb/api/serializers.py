@@ -41,3 +41,7 @@ class categoryshopSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model= product_category
 
+
+class purchaseSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = purchase
