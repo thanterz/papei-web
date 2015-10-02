@@ -29,6 +29,8 @@ router.register(r'api/announcements',views.announcementsViewSet)
 router.register(r'api/shops/(?P<shop_id>\d+)/categories',views.categoryshopViewSet,base_name="product_category")
 router.register(r'api/shops/(?P<shop_id>\d+)/categories/(?P<cat_id>\d+)',views.productcategoryshopViewSet,base_name="product")
 router.register(r'api/us/(?P<uid>\d+)/pickups',views.purchaseViewSet,base_name="purchase")
+router.register(r'api/menu',views.menuViewSet)
+
 
 
 urlpatterns = [

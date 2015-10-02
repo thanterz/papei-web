@@ -68,11 +68,7 @@
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="about-us.html">About Us</a></li>
-                        <li><a href="blog.html">Blog</a></li> 
-                        <li><a href="contact-us.html">Contact</a></li>                        
+                    <ul class="nav navbar-nav">                     
                     </ul>
                 </div>
             </div><!--/.container-->
@@ -763,6 +759,27 @@
     </footer><!--/#footer-->
 
     <script src="js/jquery.js"></script>
+    <script>
+    jQuery.ajax({
+            url: "http://127.0.0.1:8000/api/api/menu/?format=json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            success: function(resultData) {
+                //here is your json.
+                  // process it
+                $.each( resultData, function( key, value ) {
+                    //alert( key + ": " + value );
+                    //console.log(value.url);
+                    $( ".navbar-nav" ).append( "<li><a href="+ value.uri +">" + value.title + "</a></li>" );        
+                });
+
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            },
+
+            timeout: 120000,
+        });
+    </script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/jquery.isotope.min.js"></script>

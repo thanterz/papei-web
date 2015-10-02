@@ -1,5 +1,5 @@
 from django.forms import widgets
-from models import shop_categories,purchase,shop,shop_places,product_category,product,comments,purchase_items,announcements
+from models import shop_categories,menu,purchase,shop,shop_places,product_category,product,comments,purchase_items,announcements
 from rest_framework import serializers
 
 
@@ -45,3 +45,7 @@ class categoryshopSerializer(serializers.HyperlinkedModelSerializer):
 class purchaseSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = purchase
+
+class menuSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = menu

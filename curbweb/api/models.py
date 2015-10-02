@@ -50,4 +50,8 @@ class announcements(models.Model):
 	body = models.TextField()
 	image = models.ImageField(upload_to='announce',default='')
 
+class menu(models.Model):
+	title = models.TextField()
+	order = models.IntegerField()
+	uri = models.CharField(max_length=30)
 
