@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import datetime
+from django.utils.timezone import utc
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('api', '0008_announcements'),
+    ]
+
+    operations = [
+        migrations.AddField(
+            model_name='product_category',
+            name='shop_id',
+            field=models.ForeignKey(related_name='categories', default=datetime.datetime(2015, 9, 9, 22, 33, 4, 891045, tzinfo=utc), to='api.shop'),
+            preserve_default=False,
+        ),
+    ]
