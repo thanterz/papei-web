@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'rest_auth',
     'corsheaders'
 )
-CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ORIGIN_ALLOW_ALL = True
 
