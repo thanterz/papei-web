@@ -1,13 +1,11 @@
 from django.db import models
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
+from django.contrib.auth.models import User
+import uuid
 # Create your models here.
 
-class purchase(models.Model):
-	purchase_no = models.CharField(max_length=20)
-	client = models.ForeignKey(User,related_name='user_id')
-	pick = models.BooleanField(default=False)
-	date = models.DateTimeField()
 
 class shop(models.Model):
 	name = models.CharField(max_length=50)
@@ -16,7 +14,17 @@ class shop(models.Model):
 class shop_places(models.Model):
 	lat = models.FloatField()
 	lon = models.FloatField()
+	address = models.CharField(max_length=80, null=True, blank=True)
+	geom = models.PointField(srid=4326, null=True, blank=True)
+	objects = models.GeoManager()
 	shop = models.ForeignKey(shop,related_name='shopid')
+
+class purchase(models.Model):
+	purchase_no = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	client = models.ForeignKey(User,related_name='user_id')
+	pick = models.BooleanField(default=False)
+	date = models.DateTimeField()
+	store = models.ForeignKey(shop_places,related_name='store')
 
 class product_category(models.Model):
 	name = models.CharField(max_length=150)
@@ -49,9 +57,11 @@ class announcements(models.Model):
 	summary = models.TextField()
 	body = models.TextField()
 	image = models.ImageField(upload_to='announce',default='')
+        #cdate = models.DateTimeField(default=datetime.now(), blank=True)
+	created = models.DateTimeField(auto_now_add=True)	
 
 class menu(models.Model):
 	title = models.TextField()
+	content = models.TextField()
 	order = models.IntegerField()
 	uri = models.CharField(max_length=30)
-

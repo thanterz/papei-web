@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.core.urlresolvers import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -28,6 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+LOGIN_URL = reverse_lazy('two_factor:login')
+TWO_FACTOR_PATCH_ADMIN = True
 # Application definition
 
 INSTALLED_APPS = (
@@ -37,12 +40,22 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'api',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
-    'corsheaders'
+    'corsheaders',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
 )
+SITE_ID = 2
+
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -65,12 +78,21 @@ CORS_ALLOW_METHODS = (
     'OPTIONS'
 )
 
+#AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+#    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+#    'allauth.account.auth_backends.AuthenticationBackend',
+#)
+
 MIDDLEWARE_CLASSES = (
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -78,7 +100,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'curbweb.urls'
-
+POSTGIS_TEMPLATE = 'curbside'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -90,6 +112,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+		# `allauth` needs this from django
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -117,14 +141,13 @@ REST_FRAMEWORK = {
     # Only used if the `serializer_class` attribute is not set on a view.
     'DEFAULT_MODEL_SERIALIZER_CLASS':
         'rest_framework.serializers.HyperlinkedModelSerializer',
-
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
          'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ]
 }
-
+#REST_SESSION_LOGIN = False
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -143,4 +166,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = '/home/thanterz/webpapei/web_papei/curbweb/media/'
+STATIC_ROOT = '/home/thanterz/webpapei/curbweb/static'
+MEDIA_ROOT = '/home/thanterz/webpapei/curbweb/media/'
+MEDIA_URL = 'http://www.theama.info/media/'
+
+EMAIL_HOST = 'mail.theama.info'
+EMAIL_HOST_USER = 'testit@theama.info'
+EMAIL_HOST_PASSWORD = 'k@t21007'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>CMS | Sidecurb</title>
+	
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    	
+	<script>
+		
+		window.onload = function() {
+			CKEDITOR.replace( 'content' );
+			CKEDITOR.replace( 'contentNews' );
+		};
+	</script>
+</head><!--/head-->
+
+<body class="homepage">
+
+    <header id="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-2">
+                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +0123 456 70 90</p></div>
+                    </div>
+                    <div class="col-sm-6 col-xs-8">
+                       <div class="social">
+                            <ul class="social-share">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                            </ul>
+                            <div class="search">
+                                <form role="form">
+                                    <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                                    <i class="fa fa-search"></i>
+                                </form>
+                           </div>
+                       </div>
+                    </div>
+					<div class="col-sm-1 col-xs-1">
+						<a href="#"><img class="img-responsive" src="css/images/user.png" alt="android" onclick ="Javascript:logout(this)"></a>
+					</div>
+					<div class="col-sm-1 col-xs-1" id="usermsg" >
+					</div>
+                </div>
+            </div><!--/.container-->
+        </div><!--/.top-bar-->
+
+        <nav class="navbar navbar-inverse" role="banner" >
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"><img src="css/images/logo-color@2x_red.png" alt="logo"></a>
+                </div>
+				
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">                     
+                    </ul>
+
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+		
+    </header><!--/header-->
+	<!--div class="tabs">
+		<a data-toggle="tab1">Categories</a>
+		<a data-toggle="tab2">News</a>
+	</div-->
+	<div class="maincms">
+        <div class = "container" style="margin-bottom : 40px">
+	<div class="row">	
+	<ul class="nav nav-pills">
+		<li class="active"><a data-toggle="tab" href="#tab1">Categories</a></li>
+		<li><a data-toggle="tab" href="#tab2">News</a></li>
+	</ul>
+	</div>
+	<div class ="row">
+	<div class="tab-content">
+		<div id="tab1" class="tab-pane fade in active">
+			<!--h3 data-toggle="collapse" data-target="#form">Προσθήκη Κατηγορίας</h3-->
+			<button class="btn" data-toggle="collapse" data-target="#tablecat">Επεξεργασία Κατηγορίας</button>
+			<div class="table-responsive" id="tablecat">          
+				<table class="table" id="myTableData">
+					<thead>
+					  <tr>
+						<th>Order</th>
+						<th>Title</th>
+						<th>Content</th>
+						<th>uri</th>
+						<th>url</th>
+						<th>Actions</th>
+					  </tr>
+					</thead>
+				</table>
+			</div>
+			<button class="btn" data-toggle="collapse" data-target="#form" style ="margin-top:100px;" >Προσθήκη Κατηγορίας</button>
+			<form id="form">
+				<div class="form-group">
+				<label for="title">Title</label>
+				<input type="text" class="form-control" id="title" placeholder="title">
+				</div>
+				<div class="form-group">
+				<label for="order">Order</label>
+				<input type="number" class="form-control" id="order" placeholder="order">
+				</div>
+				<div class="form-group">
+				<label for="order">Content</label>
+				<textarea class="form-control" rows="5" id="content" placeholder="content"></textarea>
+				</div>
+				<div class="form-group">
+				<label for="uri">uri</label>
+				<input type="text" class="form-control" id="uri" placeholder="uri">
+				</div>
+				<input type="button" class="btn btn-primary" style="float: right;" onClick="Javascript:addCategory(this)" value = "Προσθήκη">
+			</form></br>
+			<!--h3 data-toggle="collapse" data-target="#tablecat">Επεξεργασία Κατηγορίας</h3-->
+		</div>
+		<div id="tab2" class="tab-pane fade">
+			<button class="btn" data-toggle="collapse" data-target="#news">Επεξεργασία Ανακοινώσεων</button></br>
+			<div id="news"></div>
+			<div id="paging"></div>
+			<button class="btn" data-toggle="collapse" data-target="#newsform"  style ="margin-top:100px;" >Προσθήκη Ανακοίνωσης</button></br>
+			<form id="newsform" enctype="multipart/form-data">
+				<div class="form-group">
+				<label for="title">Title</label>
+				<input type="text" class="form-control" id="titleNews" placeholder="title">
+				</div>
+				<div class="form-group">
+				<label for="image">Image</label>
+				<input type="file" class="form-control" id="imageNews" placeholder="image" >
+				</div>
+				<div class="form-group">
+				<label for="order">Content</label>
+				<textarea class="form-control" rows="5" id="contentNews" placeholder="content"></textarea>
+				</div>
+				<input type="button" class="btn btn-primary" style="float: right;" onClick="Javascript:addNews(this)" value = "Προσθήκη">
+			</form>
+		</div>
+	</div>
+	</div>
+	</div></div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+	</div>
+<footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    &copy; 2015 <a target="_blank" href="http://www.theama.info/" title="t-v">Terzis-Varvates</a>. All Rights Reserved.
+                </div>
+                <div class="col-sm-6">
+                    <ul class="pull-right">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="download.html">Download</a></li>
+                        <li><a href="how.html">How it works</a></li>
+                        <li><a href="contact-us.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+
+    <script src="js/jquery.js"></script>
+	<script src="js/lib/main.js"></script>
+	<script src="js/lib/cms.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
+	<script src="ckeditor/ckeditor.js"></script>
+</body>
+</html>
